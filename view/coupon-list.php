@@ -10,7 +10,7 @@
 			'code'    => 'Coupon Code',	
 			'promo_category'    => 'Promo Category',	
             'email'   => 'Email Address',
-            'action'   => 'Delete',
+            'action'   => 'Action',
         );
 	$ListTable = new List_Table();
 	$ListTable->set_table_data($get_coupons);

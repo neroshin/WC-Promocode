@@ -118,7 +118,7 @@ class List_Table extends WP_List_Table
 			case 'action':
 				$add_meta_nonce = wp_create_nonce( 'promo_delete_form_nonce' );
 				
-				return "<a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_delete&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Delete</a>";
+				return "<a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_delete&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Delete</a> | <a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_update&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Updata</a>";
             default:
                 return print_r( $item, true );	
         }
