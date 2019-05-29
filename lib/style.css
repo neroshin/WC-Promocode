@@ -1,0 +1,286 @@
+i.fa.fa-scissors {
+    background: rgb(150,150,150,0.6);
+    color: #ffffff;
+    position: fixed;
+    bottom: 19px;
+    right: 92px;
+    z-index: 999;
+    padding: 13px 13px;
+    border-radius: 60%;
+    transition: 0.3s ease-in-out;
+}
+
+
+#popup_box {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.clear {
+  clear:both;
+}
+.description {
+  text-align:center;
+  font-size:1.5em;
+  margin:50px;
+}
+
+/* ///////////////////////////////////////
+    // Ticket Layout & Positioning \\
+////////////////////////////////////////*/
+/* This is for the page layout, feel free to remove */
+.ticketHolder {
+  display: block;
+  margin: 10px auto;
+  float: left;
+  width: 33%;
+  height: 100px;
+}
+div.couponContainer {
+  
+  clear: both;
+}
+
+/* ///////////////////////////////////////
+    // Ticket Styles \\
+////////////////////////////////////////*/
+.coupon {
+  margin:0 auto;
+      width: 229px;
+  padding: 20px 0;
+  border: 2px solid #910000;
+  border-width: 1px 0;
+  position:relative;
+  background: rgb(201,12,18);
+  
+  transition:All 0.2549s ease;
+  -webkit-transition:All 0.2549s ease;
+  -moz-transition:All 0.2549s ease;
+  -o-transition:All 0.2549s ease;
+  
+}
+
+.coupon .inner{
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  padding: 0px 40px;
+  margin: 0 -20px;
+  background: rgb(201,12,18);
+  border: 2px solid #910000;
+  border-width: 0 1px;
+}
+.coupon .inner div {
+  color:#efefef;
+  font-size: 1.1em;
+  margin: 0;
+  text-align:center;
+}
+.savings {
+  font-size:1.8em!important;
+  padding: 8px 0;
+}
+.coupon .inner div.couponCode {
+  font-size:2em;
+  color:#fff;
+  line-height: 1em;
+}
+.coupon:before, .coupon:after,
+.coupon .inner:before, .coupon .inner:after {
+  box-sizing: border-box;
+  content:'';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 20px solid rgb(201,12,18);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 2px #910000;
+}
+.coupon:before{
+  top: -40px;
+  left: -60px;
+  clip: rect(40px, auto, auto, 40px); /* CSS 2.1 way - deprecated */
+  -webkit-clip-path: rectangle(50%, 50%, 100%, 100%, 0, 0); /* CSS 3 */
+}
+.coupon:after{
+  top: -40px;
+  right: -59px;
+  clip: rect(40px, 40px, auto, auto);
+  -webkit-clip-path: rectangle(0, 50%, 50%, 100%, 0, 0);
+}
+.coupon .inner:before {
+  bottom: -60px;
+  left: -40px;
+  clip: rect(auto, auto, 40px, 40px);
+  -webkit-clip-path: rectangle(50%, 0, 100%, 50%, 0, 0);
+}
+.coupon .inner:after {
+  bottom: -60px;
+  right: -40px;
+  clip: rect(auto, 40px, 40px, auto);
+  -webkit-clip-path: rectangle(0, 0, 50%, 50%, 0, 0);
+}
+.noFloat {
+      float: none;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #00000085;
+}
+.reveal {
+  display:none;
+}
+span#close_coupon{
+	position: absolute;
+    top: -14px;
+    background: #ffffff80;
+    padding: 3px 7px;
+    border-radius: 50px;
+    font-size: 14px;
+    right: -37px;
+}
+button.button_modal {
+    position: absolute;
+    bottom: -47px;
+    background: #c90c12;
+    padding: 8px 11px;
+    font-size: 17px;
+    right: 25%;
+    width: 103px;
+    margin: auto;
+    border: 0;
+    color: white;
+    border-radius: 2px;
+}
+input#promocode_apply {
+    width: 100%;
+    color: black;
+    text-align: center;
+    border: 0;
+    border-radius: 2px;
+}
+
+.modal-window > div {
+    background-color: rgba(255, 255, 255, 0.93);
+    height: max-content;
+    width: 18%;
+    margin: auto;
+    bottom: 0;
+    display: block;
+    left: 0;
+    z-index: 99999;
+    opacity: 1;
+    pointer-events: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+div#open-modal {
+    width: 100%;
+    display: block;
+    top: 0;
+	opacity:0;
+    position: fixed;
+    z-index: 9999;
+}
+div#open-modal.animate_popup{
+	 animation:popup_modal 1s;
+	  -moz-animation:popup_modal 1s ; /* Firefox */
+	-webkit-animation:popup_modal 1s ;
+	 animation-direction: alternate; /* or: normal */
+	 animation-timing-function: ease-out; /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+	 animation-fill-mode: forwards; /* or: backwards, both, none */
+
+}
+
+@-moz-keyframes popup_modal /* Firefox */
+{
+0%   {top: 20px;opacity:0.5;}
+100% {top: 100px;opacity:1;}
+}
+ 
+@-webkit-keyframes popup_modal /* Firefox */
+{
+0%   {top: 20px;opacity:0.5;}
+100% {top: 100px;opacity:1;}
+}
+
+
+div#open-modal.hide_animate_popup{
+	 animation:popup_modal_hide 1s;
+	  -moz-animation:popup_modal_hide 1s ; /* Firefox */
+	-webkit-animation:popup_modal_hide 1s ;
+	 animation-direction: alternate; /* or: normal */
+	 animation-timing-function: ease-out; /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+	 animation-fill-mode: forwards; /* or: backwards, both, none */
+
+}
+
+@-moz-keyframes popup_modal_hide /* Firefox */
+{
+0%   {top: 100px;opacity:1;}
+100% {top: 20px;opacity:0;}
+}
+ 
+@-webkit-keyframes popup_modal_hide /* Firefox */
+{
+0%   {top: 100px;opacity:1;}
+100% {top: 20px;opacity:0;}
+}
+
+
+.modal-close{
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-window div:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+div#open-modal h1 {
+    font-weight: 300;
+}
+
+.animatepulse .fa.fa-scissors {
+   
+    animation-direction: alternate;
+    animation: thePulse infinite 3s ease-in-out;
+}
+
+@-keyframes thePulse {
+   0% { box-shadow: 0 0 0 2px #0000; }
+    50% {     box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #5df5e033, 0 0 0 7px rgba(0, 255, 173, 0.24);}
+    70% { box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #7ff7e61a, 0 0 0 7px rgba(156, 247, 218, 0.11);}
+    100% {   box-shadow: 0 0 0 1px #f000, 0 0 0 5px #ffffff00, 0 0 0 6px rgba(255, 4, 80, 0), 0 0 0 8px #ffffff00, 0 0 0 11px rgba(255, 4, 80, 0); }
+}
+
+@-moz-keyframes thePulse {
+     0% { box-shadow: 0 0 0 2px #0000; }
+    50% {     box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #5df5e033, 0 0 0 7px rgba(0, 255, 173, 0.24);}
+    70% { box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #7ff7e61a, 0 0 0 7px rgba(156, 247, 218, 0.11);}
+    100% {   box-shadow: 0 0 0 1px #f000, 0 0 0 5px #ffffff00, 0 0 0 6px rgba(255, 4, 80, 0), 0 0 0 8px #ffffff00, 0 0 0 11px rgba(255, 4, 80, 0); }
+
+}
+
+@-webkit-keyframes thePulse {
+     0% { box-shadow: 0 0 0 2px #0000; }
+    50% {     box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #5df5e033, 0 0 0 7px rgba(0, 255, 173, 0.24);}
+    70% { box-shadow: 0 0 0 1px #86ab9d1f, 0 0 0 2px #ffffff40, 0 0 0 8px rgba(2, 2, 2, 0.25), 0 0 0 8px #7ff7e61a, 0 0 0 7px rgba(156, 247, 218, 0.11);}
+    100% {   box-shadow: 0 0 0 1px #f000, 0 0 0 5px #ffffff00, 0 0 0 6px rgba(255, 4, 80, 0), 0 0 0 8px #ffffff00, 0 0 0 11px rgba(255, 4, 80, 0); }
+
+}
