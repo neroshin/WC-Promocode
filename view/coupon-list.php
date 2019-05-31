@@ -15,6 +15,10 @@
 	$ListTable = new List_Table();
 	$ListTable->set_table_data($get_coupons);
 	$ListTable->prepare_items(null,$columns); 
+	
+	
+	
+	
 	?>
 	<div class="wrap">
 <h1 id="add-new-user">Promocode list</h1>

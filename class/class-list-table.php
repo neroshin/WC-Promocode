@@ -110,15 +110,17 @@ class List_Table extends WP_List_Table
             case 'show_email':
             case 'exp_date':
             case 'date':
-            case 'promo_category':
             case 'last_update':
             case 'description':
+            
             case 'code':
                 return $item[ $column_name ];
 			case 'action':
 				$add_meta_nonce = wp_create_nonce( 'promo_delete_form_nonce' );
 				
-				return "<a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_delete&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Delete</a> | <a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_update&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Updata</a>";
+				return "<a href='".get_home_url()."/wp-admin/admin-post.php?action=promo_delete&promo_delete_meta_form_nonce=".$add_meta_nonce."&id=".$item['id']."'>Delete</a> | <a href='".get_home_url()."/wp-admin/admin.php?page=update-the-prmocode&id=".$item['id']."'>Update</a>";
+			case 'promo_category':
+				return get_option( 'coupon-category' )[$item['promo_category']]["name"];
             default:
                 return print_r( $item, true );	
         }

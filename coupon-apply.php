@@ -49,6 +49,21 @@ function coupon_setup_menu() {
 	add_menu_page(  'Coupon List',  'Coupon List', 'manage_options', 'coupon-main-menu','couponListPage' , '' , 26 );
 	add_submenu_page('coupon-main-menu', 'Add new','Add new', 'manage_options','add-new-coupon', 'add_new_coupon');
 	add_submenu_page('coupon-main-menu', 'Add category','Add category', 'manage_options','add-new-category', 'add_new_category');
+	
+	add_submenu_page(null, 'Update promocode','Update promocode', 'manage_options','update-the-prmocode', 'update_the_prmocode');
+}
+
+function update_the_prmocode(){
+	// require  ;
+	
+		ob_start();
+		
+		include(plugin_dir_path(__FILE__)."/view/update-coupon.php");
+		
+		$output = ob_get_clean();
+		
+		view($output);
+	
 }
 function add_new_category(){
 	// require  ;
@@ -140,18 +155,8 @@ function coupon_apply_install() {
 }
 
 register_activation_hook( __FILE__, 'coupon_apply_install' );
-/**
- * Filter the cart template path to use our cart.php template instead of the theme's
- */
-function wc_change_template_relate( $template, $template_name, $template_path ) {
-	 $basename = basename( $template );
-	//echo  $basename;
-	  if( $basename == 'related.php' ) {
-			$template =  COUP_PLUGIN_PATH.'/woocommerce/single-product/related.php';
-	 } 
- return $template;
-}
-add_filter( 'woocommerce_locate_template', 'wc_change_template_relate', 10, 3 );
+
+
 
 
 ?>

@@ -1,5 +1,16 @@
 
-	<div id="coupon_modal"><i class="fa fa-scissors" aria-hidden="true"></i></div>
+	<div id="coupon_modal">
+	<i class="fa fa-scissors" aria-hidden="true"></i>
+	<div class="circle__box">
+	  <div class="circle__wrapper circle__wrapper--right">
+		<div class="circle__whole circle__right"></div>
+	  </div>
+	  <div class="circle__wrapper circle__wrapper--left">
+		<div class="circle__whole circle__left"></div>
+	  </div>
+	</div>
+<div id="curvedarrow"></div>
+	</div>
     <div id="popup_box" style="display:none;">
 			
 		<div class="couponContainer">

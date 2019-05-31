@@ -13,8 +13,11 @@ class coupon {
 		// Display Fields
 		add_action('woocommerce_product_options_general_product_data',  array($this ,'woocommerce_product_custom_fields'));
 		// Save Fields
+		
 		add_action('woocommerce_process_product_meta',  array($this ,'woocommerce_product_custom_fields_save'));
+		
 		add_action( 'wp_ajax_nopriv_action_apply_coupon', array($this ,'action_apply_coupon') );
+		
 		add_action( 'wp_ajax_action_apply_coupon', array($this ,'action_apply_coupon') );
 		
 		///
@@ -37,9 +40,22 @@ class coupon {
 		add_action('wp_logout',  array($this ,'clear_session_on_logout'));
 	
 		 //add_filter( 'woocommerce_product_related_posts_query',  array($this ,'custom_product_related_posts_query') , 10  );
-		
+		add_filter( 'woocommerce_locate_template', array($this ,'wc_change_template_relate'), 10, 3 );
 		
 	}
+	
+	/**
+	 * Filter the cart template path to use our cart.php template instead of the theme's
+	 */
+	function wc_change_template_relate( $template, $template_name, $template_path ) {
+		 $basename = basename( $template );
+		//echo  $basename;
+		  if( $basename == 'related.php' ) {
+				$template =  COUP_PLUGIN_PATH.'/woocommerce/single-product/related.php';
+		 } 
+	 return $template;
+	}
+	
 	function filter_woocommerce_product_query_meta_query( $meta_query, $instance ) { 
  
 	 $count_row = apply_filters("db_fetch_coupon" ,$_SESSION['promocode']);
@@ -83,7 +99,7 @@ class coupon {
 	
 	function wpcoupon_product_column_offercode( $column, $postid ) {
 		if ( $column == 'coupon_code_product' ) {
-			echo get_post_meta( $postid, '_select', true );
+			echo get_option( 'coupon-category' )[get_post_meta( $postid, '_select', true )]["name"];
 		}
 	} 
 	
@@ -191,10 +207,17 @@ class coupon {
 	
 	
 	/* Utility object to html format option */
-	static public function array_to_optionitem($item){
+	static public function array_to_optionitem($item , $defualt=0){
 		$html = "";
 		foreach($item as $key => $value){
-			$html .=  "<option value='".$value["id"]."' selected='selected'>".$value["name"]."</option>";
+			if($defualt == $value["id"]){
+				$html .=  "<option value='".$value["id"]."' selected='selected'>".$value["name"]."</option>";
+			}
+			else{
+				$html .=  "<option value='".$value["id"]."'>".$value["name"]."</option>";
+			}
+			
+			
 		}
 		return  $html;
 	}

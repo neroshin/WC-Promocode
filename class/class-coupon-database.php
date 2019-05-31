@@ -10,6 +10,7 @@ class couponDatabase {
 	
 	function __construct( ) {
 		
+		add_action( 'admin_post_update_coupon_form', array($this ,'func_update_coupon_form') );
 		add_action( 'admin_post_add_coupon_form', array($this ,'func_add_coupon_form') );
 		add_action( 'admin_post_add_category_form', array($this ,'func_add_category_form') );
 		add_filter( 'check_coupon', array($this ,'func_check_coupon'), 10, 1 );
@@ -21,8 +22,54 @@ class couponDatabase {
 		
 		add_action( 'admin_post_promo_delete', array($this ,'func_promo_delete') );
 		
+		
+		
 	}
 	
+	public function db_fetch_coupon_data($id) {
+		global $wpdb;
+		$prefix = $wpdb->prefix . 'coupon_apply';
+		$result = $wpdb->get_results( "SELECT * FROM $prefix WHERE `id` = $id" );
+		
+		return $result ;
+	}
+	/* Update new coupon  */
+
+	public function func_update_coupon_form() {
+		
+
+	global $wpdb;
+	$table=$wpdb->prefix.'coupon_apply';
+			
+	
+	
+	
+	$id = $_POST["id"];
+	$first_name = $_POST["first_name"];
+	$last_name = $_POST["last_name"];
+	$email = $_POST["email"];
+	$promo_category = $_POST["promo_category"];
+	$exp_date = date('Y-m-d H:i:s' ,strtotime( $_POST["date_exp"]) );
+	
+	//print_r($exp_date);
+	 $zz = $wpdb->query( $wpdb->prepare( "UPDATE `vns_coupon_apply` SET `exp_date` = '$exp_date', `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email', `promo_category` = '$promo_category' WHERE `vns_coupon_apply`.`id` = $id;" )); 
+	
+	/* $wpdb->update("coupon_apply", array(
+				'id'=>$_POST["id"],
+				'first_name'=>$_POST["first_name"],
+				'last_name'=>$_POST["last_name"],
+				'email'=>$_POST["email"],
+				'promo_category'=>$_POST["promo_category"],
+				'exp_date'=>$_POST["date_exp"]
+				, array('id' => $_POST["id"])
+				)); */
+	
+	
+	// print_r($zz);
+	wp_redirect( get_home_url()."/wp-admin/admin.php?page=update-the-prmocode&id=".$_POST["id"]);
+		die();
+
+	}
 	/* Wp ajax check coupon is valid  */
 	function func_promo_delete(){
 		
