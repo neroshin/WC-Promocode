@@ -112,7 +112,12 @@ function func_modal_coupon() {
 	include(plugin_dir_path(__FILE__)."/view/modal-coupon.php");
 	
 	$output = ob_get_clean();
-	if ( is_user_logged_in() ) view($output);
+	
+	$user = wp_get_current_user();
+	$roles = ( array ) $user->roles;
+
+	
+	if ( is_user_logged_in() && $roles[0] == "customer" ) view($output);
 	
     // echo "<script>alert('".$_SESSION['promocode']."')</script>";
 }
