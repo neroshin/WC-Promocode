@@ -52,7 +52,7 @@ class couponDatabase {
 	$exp_date = date('Y-m-d H:i:s' ,strtotime( $_POST["date_exp"]) );
 	
 	//print_r($exp_date);
-	 $zz = $wpdb->query( $wpdb->prepare( "UPDATE `vns_coupon_apply` SET `exp_date` = '$exp_date', `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email', `promo_category` = '$promo_category' WHERE `vns_coupon_apply`.`id` = $id;" )); 
+	 $zz = $wpdb->query( $wpdb->prepare( "UPDATE `$table` SET `exp_date` = '$exp_date', `first_name` = '$first_name', `last_name` = '$last_name', `email` = '$email', `promo_category` = '$promo_category' WHERE `$table`.`id` = $id;" )); 
 	
 	/* $wpdb->update("coupon_apply", array(
 				'id'=>$_POST["id"],
@@ -78,7 +78,7 @@ class couponDatabase {
 		$prefix = $wpdb->prefix . 'coupon_apply';
 		
 			
-		$myrows = $wpdb->get_results( "DELETE FROM `$prefix` WHERE `vns_coupon_apply`.`id` = $id" );
+		$myrows = $wpdb->get_results( "DELETE FROM `$prefix` WHERE `$prefix`.`id` = $id" );
 		// print_r($myrows);
 		
 		wp_redirect( get_home_url()."/wp-admin/admin.php?page=coupon-main-menu");
